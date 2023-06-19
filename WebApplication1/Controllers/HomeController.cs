@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication1.Models;
+using WebApplication1.Models.DAO;
 
 namespace WebApplication1.Controllers
 {
@@ -20,7 +21,17 @@ namespace WebApplication1.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            TestCodeDao dao = new TestCodeDao();
+            CustomerViewModel model = new CustomerViewModel();
+            try
+            {
+                model.Customers = dao.GetAllCustomers();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(model);
         }
 
         public IActionResult Privacy()

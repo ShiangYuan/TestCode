@@ -1,8 +1,40 @@
-﻿@{
+﻿@model WebApplication1.Models.CustomerViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<table class="block_table">
+    <thead>
+        <tr>
+            <td>CustomerID</td>
+            <td>CompanyName</td>
+            <td>ContactName</td>
+            <td>ContactTitle</td>
+            <td>Address</td>
+            <td>City</td>
+            <td>Region</td>
+            <td>PostalCode</td>
+            <td>Countdy</td>
+            <td>Phone</td>
+            <td>Fax</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Customer in Model.Customers)
+        {
+        <tr>
+            <td>@Html.Raw(Customer.CustomerID)</td>
+            <td>@Html.Raw(Customer.CompanyName)</td>
+            <td>@Html.Raw(Customer.ContactName)</td>
+            <td>@Html.Raw(Customer.ContactTitle)</td>
+            <td>@Html.Raw(Customer.Address)</td>
+            <td>@Html.Raw(Customer.City)</td>
+            <td>@Html.Raw(Customer.Region)</td>
+            <td>@Html.Raw(Customer.PostalCode)</td>
+            <td>@Html.Raw(Customer.Country)</td>
+            <td>@Html.Raw(Customer.Phone)</td>
+            <td>@Html.Raw(Customer.Fax)</td>
+        </tr>
+        }
+    </tbody>
+</table>
