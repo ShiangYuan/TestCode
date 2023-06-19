@@ -18,7 +18,23 @@ namespace WebApplication1.Controllers
         {
             _logger = logger;
         }
+        [HttpGet]
+        public IActionResult Index()
+        {
+            TestCodeDao dao = new TestCodeDao();
+            CustomerViewModel model = new CustomerViewModel();
+            try
+            {
+                model.Customers = dao.GetAllCustomers();
+            }
+            catch (Exception ex)
+            {
 
+            }
+            return View(model);
+        }
+
+        [HttpPost]
         public IActionResult Index()
         {
             TestCodeDao dao = new TestCodeDao();

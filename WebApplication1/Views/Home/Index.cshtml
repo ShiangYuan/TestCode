@@ -22,19 +22,91 @@
     <tbody>
         @foreach (var Customer in Model.Customers)
         {
-        <tr>
-            <td>@Html.Raw(Customer.CustomerID)</td>
-            <td>@Html.Raw(Customer.CompanyName)</td>
-            <td>@Html.Raw(Customer.ContactName)</td>
-            <td>@Html.Raw(Customer.ContactTitle)</td>
-            <td>@Html.Raw(Customer.Address)</td>
-            <td>@Html.Raw(Customer.City)</td>
-            <td>@Html.Raw(Customer.Region)</td>
-            <td>@Html.Raw(Customer.PostalCode)</td>
-            <td>@Html.Raw(Customer.Country)</td>
-            <td>@Html.Raw(Customer.Phone)</td>
-            <td>@Html.Raw(Customer.Fax)</td>
-        </tr>
+            <tr>
+                <td>@Html.Raw(Customer.CustomerID)</td>
+                <td>@Html.Raw(Customer.CompanyName)</td>
+                <td>@Html.Raw(Customer.ContactName)</td>
+                <td>@Html.Raw(Customer.ContactTitle)</td>
+                <td>@Html.Raw(Customer.Address)</td>
+                <td>@Html.Raw(Customer.City)</td>
+                <td>@Html.Raw(Customer.Region)</td>
+                <td>@Html.Raw(Customer.PostalCode)</td>
+                <td>@Html.Raw(Customer.Country)</td>
+                <td>@Html.Raw(Customer.Phone)</td>
+                <td>@Html.Raw(Customer.Fax)</td>
+            </tr>
         }
     </tbody>
 </table>
+<form class="newform mt-5" id="customer">
+
+    <div class="mb-2">
+        <input type="text" id="CustomerID" name="CustomerID" class="form-control" placeholder="CustomerID*">
+    </div>
+
+    <div class="mb-2">
+        <input type="text" id="CompanyName" name="CompanyName" class="form-control" placeholder="CompanyName*">
+    </div>
+
+    <div class="mb-2">
+        <input type="text" id="ContactName" name="ContactName" class="form-control" placeholder="ContactName*">
+    </div>
+
+    <div class="mb-2">
+        <input type="text" id="ContactTitle" name="ContactTitle" class="form-control" placeholder="ContactTitle*">
+    </div>
+
+    <div class="mb-2">
+        <input type="text" id="Address" name="Address" class="form-control" placeholder="Address*">
+    </div>
+
+    <div class="mb-2">
+        <input type="text" id="City" name="City" class="form-control" placeholder="City*">
+    </div>
+
+    <div class="mb-2">
+        <input type="text" id="Region" name="Region" class="form-control" placeholder="Region*">
+    </div>
+
+    <div class="mb-2">
+        <input type="text" id="PostalCode" name="PostalCode" class="form-control" placeholder="PostalCode*">
+    </div>
+
+    <div class="mb-2">
+        <input type="text" id="Country" name="Country" class="form-control" placeholder="Country*">
+    </div>
+
+    <div class="mb-2">
+        <input type="text" id="Phone" name="Phone" class="form-control" placeholder="Phone*">
+    </div>
+
+    <div class="mb-2">
+        <input type="text" id="Fax" name="Fax" class="form-control" placeholder="Fax*">
+    </div>
+
+    <button type="button" class="bt_3" onclick="chk_form();">確認送出</button>
+</form>
+
+<script src="~/Content/js/jquery-ui/jquery-ui.js"></script>
+
+<script>
+
+    function chk_form() {
+        var url = $("#customer").attr("action");
+        $.ajax({
+            type: 'POST',
+            url: @Url.Content("~/events-register/" + Model.oAct.ActId + "/"),
+            data: JSON.stringify($('#customer').serializeArray()),
+            contentType: "application/json; charset=utf-8",
+            processData: false
+        }).done(function (result) {
+            if (result == 'SUCCESS') {
+                alert("新增成功")
+            } else {
+                alert("新增失敗")
+            }
+        });
+    }
+
+</script>
+
