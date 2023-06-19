@@ -86,16 +86,14 @@
 
     <button type="button" class="bt_3" onclick="chk_form();">確認送出</button>
 </form>
+@section scripts {
+    <script>
 
-<script src="~/Content/js/jquery-ui/jquery-ui.js"></script>
-
-<script>
-
-    function chk_form() {
-        var url = $("#customer").attr("action");
+        function chk_form() {
+            console.log("JSON.stringify($('#customer').serializeArray())", JSON.stringify($('#customer').serializeArray()))
         $.ajax({
             type: 'POST',
-            @*url: @Url.Content("~/events-register/" + Model.oAct.ActId + "/"),*@
+            url: @Url.Content("~/Home/"),
             data: JSON.stringify($('#customer').serializeArray()),
             contentType: "application/json; charset=utf-8",
             processData: false
@@ -108,4 +106,5 @@
         });
     }
 
-</script>
+    </script>
+}

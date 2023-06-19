@@ -10,6 +10,7 @@ namespace WebApplication2.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public ActionResult Index()
         {
             TestCodeDao dao = new TestCodeDao();
@@ -23,6 +24,22 @@ namespace WebApplication2.Controllers
 
             }
             return View(model);
+        }
+        
+        [HttpPost]
+        public string Index(Customer data)
+        {
+            TestCodeDao dao = new TestCodeDao();
+            string result = "";
+            try
+            {
+                result = dao.InsertCustomer(data);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return "SUCCESS";
         }
 
         public ActionResult About()
